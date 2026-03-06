@@ -16,9 +16,6 @@
                 <span class="logo-text">אזור מורה</span>
             </div>
             <div class="header-actions">
-                <button class="btn-permissions" onclick="showPermissions()" style="background: linear-gradient(135deg, #64B5F6, #2196F3); color: white; padding: 10px 20px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 16px; margin-left: 15px;">
-                    🔐 ניהול הרשאות תלמידים
-                </button>
                 <button class="btn-settings" onclick="showSettings()">⚙️ הגדרות</button>
                 <button class="btn-logout" onclick="logout()">🚪 יציאה</button>
             </div>
@@ -82,15 +79,20 @@
                     </div>
                 </div>
 
-                <!-- כרטיס ניהול הרשאות -->
-                <div style="margin: 30px 0; padding: 30px; background: linear-gradient(135deg, rgba(100, 181, 246, 0.15), rgba(33, 150, 243, 0.15)); border: 3px solid #2196F3; border-radius: 20px; text-align: center; box-shadow: 0 8px 25px rgba(33, 150, 243, 0.2);">
-                    <div style="font-size: 48px; margin-bottom: 15px;">🔐</div>
-                    <h3 style="color: #64B5F6; margin-bottom: 15px; font-size: 24px;">ניהול הרשאות תלמידים</h3>
-                    <p style="color: #bbb; margin-bottom: 25px; font-size: 16px; line-height: 1.6;">
-                        הוסף תלמידים חדשים למערכת, הענק להם שם משתמש וסיסמה,<br>
-                        ייבא רשימות מגוגל שיטס, ונהל הרשאות גישה למשחקים
+                <!-- כרטיס ניהול הרשאות - מרכזי וגדול -->
+                <div style="margin: 40px auto; max-width: 800px; padding: 50px 40px; background: linear-gradient(135deg, rgba(100, 181, 246, 0.2), rgba(33, 150, 243, 0.2)); border: 4px solid #2196F3; border-radius: 25px; text-align: center; box-shadow: 0 12px 40px rgba(33, 150, 243, 0.3);">
+                    <div style="font-size: 64px; margin-bottom: 20px;">🔐</div>
+                    <h2 style="color: #64B5F6; margin-bottom: 20px; font-size: 32px; font-weight: 800;">ניהול הרשאות תלמידים</h2>
+                    <p style="color: #bbb; margin-bottom: 30px; font-size: 18px; line-height: 1.8;">
+                        כאן תוכל להוסיף תלמידים חדשים למערכת, לנהל הרשאות גישה,<br>
+                        לייבא רשימות מגוגל שיטס ולשלוט מי יכול להיכנס למשחקים
                     </p>
-                    <button onclick="showPermissions()" style="padding: 18px 50px; background: linear-gradient(135deg, #64B5F6, #2196F3); border: none; border-radius: 12px; color: white; font-size: 20px; font-weight: 700; cursor: pointer; box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 30px rgba(33, 150, 243, 0.6)'" onmouseout="this.style.transform=''; this.style.boxShadow='0 6px 20px rgba(33, 150, 243, 0.4)'">
+                    <div style="background: rgba(0, 0, 0, 0.2); padding: 20px; border-radius: 15px; margin-bottom: 30px;">
+                        <p style="color: #64B5F6; font-size: 16px; margin: 0;">
+                            💡 <strong>פשוט וקל:</strong> רק שם ותעודת זהות - הת"ז משמשת גם כסיסמה!
+                        </p>
+                    </div>
+                    <button onclick="showPermissions()" style="padding: 20px 60px; background: linear-gradient(135deg, #64B5F6, #2196F3); border: none; border-radius: 15px; color: white; font-size: 22px; font-weight: 800; cursor: pointer; box-shadow: 0 8px 25px rgba(33, 150, 243, 0.5); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px) scale(1.05)'; this.style.boxShadow='0 15px 40px rgba(33, 150, 243, 0.7)'" onmouseout="this.style.transform=''; this.style.boxShadow='0 8px 25px rgba(33, 150, 243, 0.5)'">
                         ➕ פתח ניהול הרשאות
                     </button>
                 </div>

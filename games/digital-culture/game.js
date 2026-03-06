@@ -188,12 +188,17 @@ function startGame() {
     
     // קבלת ת"ז ושם מ-localStorage (נשמר באזור תלמיד)
     studentId = localStorage.getItem('studentId') || '';
-    studentName = StudentManager.getStudentName(studentId) || 'תלמיד';
+    studentName = localStorage.getItem('studentName') || 'תלמיד';
     
     if (!studentId) {
         alert('לא זוהית במערכת. חזור לאזור תלמיד והזדהה תחילה.');
         window.location.href = '../../student/index.html';
         return;
+    }
+    
+    // איפוס התקדמות ישנה (למעבר חלק)
+    if (window.ProgressManager) {
+        ProgressManager.clearOldProgress();
     }
     
     const checkedBoxes = document.querySelectorAll('.concept-item input[type="checkbox"]:checked');
