@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ניהול הרשאות תלמידים</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+
+        .permissions-page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(100, 181, 246, 0.1), rgba(33, 150, 243, 0.1));
+            border-radius: 20px;
+            border: 2px solid rgba(100, 181, 246, 0.3);
+        }
+
+        .page-header .icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .page-header h1 {
+            color: #64B5F6;
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: 900;
+        }
+
+        .page-header p {
+            color: #aaa;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-bottom: 30px;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+
+        .permissions-content {
+            background: rgba(30, 30, 30, 0.6);
+            border-radius: 20px;
+            padding: 0;
+            border: 2px solid rgba(100, 181, 246, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="permissions-page">
+        <a href="index.html" class="back-btn">
+            ← חזרה לאזור מורה
+        </a>
+
+        <div class="page-header">
+            <div class="icon">🔐</div>
+            <h1>ניהול הרשאות תלמידים</h1>
+            <p>
+                הוסף תלמידים חדשים, נהל הרשאות גישה, ייבא רשימות מגוגל שיטס<br>
+                ושלוט מי יכול להיכנס למשחקים
+            </p>
+        </div>
+
+        <div class="permissions-content" id="permissionsContainer">
+            <!-- כאן ייטען תוכן ניהול ההרשאות -->
+        </div>
+    </div>
+
+    <script type="module" src="../shared/firebase-config.js"></script>
+    <script src="simple-permissions.js"></script>
+    <script src="simple-permissions-ui.js"></script>
+    <script>
+        // טעינה אוטומטית של ממשק ההרשאות
+        window.addEventListener('load', async function() {
+            // פתיחה ישירה של הממשק
+            await showSimplePermissions();
+            
+            // העברת התוכן למיכל
+            setTimeout(() => {
+                const modal = document.getElementById('permissionsModal');
+                if (modal) {
+                    const content = modal.querySelector('.modal-content');
+                    if (content) {
+                        // העתקת התוכן
+                        document.getElementById('permissionsContainer').innerHTML = content.innerHTML;
+                        // הסרת המודאל
+                        modal.remove();
+                        
+                        // עדכון סגנון
+                        const container = document.getElementById('permissionsContainer');
+                        container.style.background = 'transparent';
+                        container.style.boxShadow = 'none';
+                        container.style.maxWidth = '100%';
+                        container.style.maxHeight = 'none';
+                        container.style.overflow = 'visible';
+                    }
+                }
+            }, 100);
+        });
+
+        // עדכון פונקציית הסגירה
+        window.closeSimplePermissions = function() {
+            window.location.href = 'index.html';
+        };
+    </script>
+</body>
+</html>

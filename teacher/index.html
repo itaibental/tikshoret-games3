@@ -81,6 +81,60 @@
             transform: translateY(-5px) scale(1.05);
             box-shadow: 0 15px 40px rgba(33, 150, 243, 0.8);
         }
+
+        /* תפריט הגדרות */
+        .settings-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .settings-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(50, 50, 50, 0.6);
+            border: 2px solid rgba(100, 181, 246, 0.2);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .settings-item:hover {
+            background: rgba(60, 60, 60, 0.8);
+            border-color: #64B5F6;
+            transform: translateX(-5px);
+        }
+
+        .settings-icon {
+            font-size: 32px;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .settings-info {
+            flex: 1;
+        }
+
+        .settings-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #e0e0e0;
+            margin-bottom: 5px;
+        }
+
+        .settings-desc {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .settings-arrow {
+            font-size: 24px;
+            color: #64B5F6;
+        }
     </style>
 </head>
 <body>
@@ -152,24 +206,6 @@
                             <div class="stat-value" id="averageProgress">0%</div>
                             <div class="stat-label">ממוצע התקדמות</div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- כרטיס ניהול הרשאות - ממורכז מלא -->
-                <div class="permissions-card-wrapper">
-                    <div class="permissions-card">
-                        <div class="icon">🔐</div>
-                        <h2>ניהול הרשאות תלמידים</h2>
-                        <p class="description">
-                            כאן תוכל להוסיף תלמידים חדשים למערכת, לנהל הרשאות גישה,<br>
-                            לייבא רשימות מגוגל שיטס ולשלוט מי יכול להיכנס למשחקים
-                        </p>
-                        <div class="info-box">
-                            <p>💡 <strong>פשוט וקל:</strong> רק שם ותעודת זהות - הת"ז משמשת גם כסיסמה!</p>
-                        </div>
-                        <button onclick="showPermissions()" class="btn-open">
-                            ➕ פתח ניהול הרשאות
-                        </button>
                     </div>
                 </div>
 
@@ -434,6 +470,57 @@
         function logout() {
             window.soundManager.playClick();
             handleTeacherLogout();
+        }
+
+        function showSettings() {
+            // הצגת תפריט הגדרות
+            const settingsMenu = `
+                <div class="modal-overlay" id="settingsModal" onclick="if(event.target===this) closeSettings()">
+                    <div class="modal-content" style="max-width: 500px;">
+                        <div class="modal-header">
+                            <h3>⚙️ הגדרות</h3>
+                            <button class="close-btn" onclick="closeSettings()">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="settings-menu">
+                                <a href="permissions.html" class="settings-item">
+                                    <div class="settings-icon">🔐</div>
+                                    <div class="settings-info">
+                                        <div class="settings-title">ניהול הרשאות תלמידים</div>
+                                        <div class="settings-desc">הוסף, ערוך והסר תלמידים מהמערכת</div>
+                                    </div>
+                                    <div class="settings-arrow">←</div>
+                                </a>
+                                
+                                <div class="settings-item" onclick="alert('בקרוב!')">
+                                    <div class="settings-icon">📊</div>
+                                    <div class="settings-info">
+                                        <div class="settings-title">הגדרות דוחות</div>
+                                        <div class="settings-desc">התאם אישית תצוגת דוחות</div>
+                                    </div>
+                                    <div class="settings-arrow">←</div>
+                                </div>
+                                
+                                <div class="settings-item" onclick="alert('בקרוב!')">
+                                    <div class="settings-icon">🎮</div>
+                                    <div class="settings-info">
+                                        <div class="settings-title">הגדרות משחקים</div>
+                                        <div class="settings-desc">נהל משחקים זמינים</div>
+                                    </div>
+                                    <div class="settings-arrow">←</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', settingsMenu);
+        }
+
+        function closeSettings() {
+            const modal = document.getElementById('settingsModal');
+            if (modal) modal.remove();
         }
         
         // הוספת כפתור ניהול תלמידים לתפריט
