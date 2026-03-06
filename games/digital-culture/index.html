@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>זירת התרבות הדיגיטלית</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- כותרת עליונה -->
+    <div class="admin-header">
+        <div class="logo" onclick="goBack()" style="cursor: pointer;">🏠 חזרה לאזור תלמיד</div>
+        <div style="color: #ff9900; font-weight: 700; font-size: 1.2em;">🎮 זירת התרבות הדיגיטלית</div>
+    </div>
+
+    <div class="container" id="mainContainer">
+        <!-- עמוד ראשי -->
+        <div id="homePage">
+            <h1>🎮 זירת התרבות הדיגיטלית 🎮</h1>
+            
+            <div class="intro-section">
+                <h2>ברוכים הבאים למשחק הלימודי!</h2>
+                <p><strong>מטרת המשחק:</strong> להעמיק את הידע שלך במושגים המרכזיים של זירת התרבות הדיגיטלית.</p>
+                <p><strong>איך זה עובד?</strong></p>
+                <ul style="margin-right: 20px; line-height: 1.8;">
+                    <li>בחר את המושגים שאותם תרצה ללמוד (לחץ על כל מושג לקריאת הסבר)</li>
+                    <li>בכל פרק תקבל הצגה מפורטת של המושג בחלון קופץ</li>
+                    <li>לאחר מכן תענה על 5 שאלות ברמות קושי שונות</li>
+                    <li>קבל ניקוד לפי רמת הקושי: קל (1), סביר (2), מאתגר (3), מומחים (4), מקצוענים (5)</li>
+                    <li>בסוף כל פרק תוכל לעבור למושג הבא או לחזור ולנסות שוב</li>
+                </ul>
+            </div>
+
+            <div class="concepts-selection">
+                <h3 style="margin-bottom: 20px;">בחר את המושגים שתרצה ללמוד:</h3>
+                <div class="selection-buttons">
+                    <button class="select-all-btn" onclick="selectAllConcepts()">✓ בחר הכל</button>
+                    <button class="select-all-btn deselect" onclick="deselectAllConcepts()">✗ בטל הכל</button>
+                </div>
+                
+                <div id="conceptsAccordion"></div>
+            </div>
+
+            <button class="btn" onclick="startGame()" id="startBtn" disabled>התחל משחק!</button>
+        </div>
+
+        <!-- עמוד משחק -->
+        <div id="gamePage" class="hidden">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0%</div>
+            </div>
+
+            <div class="score-display">
+                <div class="score-numbers">
+                    <div class="score-item">
+                        <div class="number" id="currentScore">0</div>
+                        <div class="label">ניקוד</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="number" id="correctCount">0</div>
+                        <div class="label">תשובות נכונות</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="number" id="incorrectCount">0</div>
+                        <div class="label">תשובות שגויות</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="questionContainer" class="question-container hidden"></div>
+
+            <div class="navigation-buttons hidden" id="navigationButtons">
+                <button class="btn" onclick="restartConcept()">🔄 חזור לתחילת הפרק</button>
+                <button class="btn" onclick="nextConcept()">➡️ עבור למושג הבא</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- חתימה -->
+    <footer class="game-footer">
+        <p>נוצר ע"י <strong>איתי בן טל</strong> | המרחב החינוכי תיכון עירוני ה'</p>
+    </footer>
+
+    <script type="module" src="../../shared/firebase-config.js"></script>
+    <script src="../../shared/sounds.js"></script>
+    <script src="../../teacher/permissions-manager.js"></script>
+    <script src="data.js"></script>
+    <script src="game.js"></script>
+    
+    <script>
+        // טעינת שם התלמיד
+        window.addEventListener('load', function() {
+            const savedName = localStorage.getItem('studentName');
+            if (savedName) {
+                document.getElementById('studentName').value = savedName;
+                updateStartButton();
+            }
+        });
+        
+        function goBack() {
+            window.soundManager.playClick();
+            if (confirm('האם אתה בטוח שברצונך לחזור? התקדמותך תישמר.')) {
+                window.location.href = '../../student/index.html';
+            }
+        }
+    </script>
+</body>
+</html>

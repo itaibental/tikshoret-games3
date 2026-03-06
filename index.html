@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0; url=landing.html">
+    <title>מערכת משחקי למידה - מפנה...</title>
+    <style>
+        body {
+            font-family: 'Rubik', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #0a0a0a;
+            color: #ff9900;
+            text-align: center;
+        }
+        .loading {
+            font-size: 2em;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 153, 0, 0.2);
+            border-top: 4px solid #ff9900;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="spinner"></div>
+        <div class="loading">טוען מערכת משחקי למידה...</div>
+        <p style="color: #666; margin-top: 20px;">אם לא מועברת אוטומטית, <a href="landing.html" style="color: #ff6600;">לחץ כאן</a></p>
+    </div>
+    <script>
+        window.location.href = 'landing.html';
+    </script>
+</body>
+</html>

@@ -1,0 +1,852 @@
+/* teacher-styles.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Rubik', sans-serif;
+    background: #0a0a0a;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(255, 102, 0, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 153, 0, 0.1) 0%, transparent 50%),
+        linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 100%);
+    min-height: 100vh;
+}
+
+/* כותרת */
+.main-header {
+    background: rgba(20, 20, 20, 0.95);
+    border-bottom: 2px solid rgba(255, 102, 0, 0.3);
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.header-content {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+}
+
+.logo-icon {
+    font-size: 2.5em;
+}
+
+.logo-text {
+    font-size: 1.5em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ff6600 0%, #ff9900 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-settings {
+    background: rgba(255, 193, 7, 0.2);
+    border: 1px solid #FFC107;
+    color: #FFD54F;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-settings:hover {
+    background: rgba(255, 193, 7, 0.3);
+}
+
+.btn-logout {
+    background: rgba(220, 53, 69, 0.2);
+    border: 1px solid #dc3545;
+    color: #ff6b6b;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+/* תוכן */
+.main-content {
+    padding: 40px 20px;
+}
+
+.content-wrapper {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* טאבים */
+.tabs-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 40px;
+    border-bottom: 2px solid rgba(255, 102, 0, 0.3);
+    overflow-x: auto;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    padding: 15px 30px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+}
+
+.tab-btn:hover {
+    color: #ff9900;
+}
+
+.tab-btn.active {
+    color: #ff6600;
+    border-bottom-color: #ff6600;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-content h2 {
+    color: #ff9900;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+/* כרטיסי סטטיסטיקה */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: rgba(30, 30, 30, 0.8);
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid rgba(255, 102, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 102, 0, 0.3);
+}
+
+.stat-icon {
+    font-size: 3em;
+}
+
+.stat-value {
+    font-size: 2.5em;
+    font-weight: 900;
+    color: #ff6600;
+}
+
+.stat-label {
+    color: #aaa;
+    font-size: 0.95em;
+}
+
+/* פעילות אחרונה */
+.recent-activity {
+    background: rgba(30, 30, 30, 0.8);
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid rgba(255, 102, 0, 0.3);
+}
+
+.recent-activity h3 {
+    color: #ff9900;
+    font-size: 1.8em;
+    margin-bottom: 25px;
+}
+
+.activity-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(40, 40, 40, 0.6);
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.activity-icon {
+    font-size: 1.5em;
+}
+
+.activity-info strong {
+    color: #ff9900;
+}
+
+.activity-meta {
+    color: #888;
+    font-size: 0.9em;
+    margin-top: 5px;
+    display: flex;
+    gap: 15px;
+}
+
+/* סינון */
+.filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.filters input, .filters select {
+    flex: 1;
+    padding: 15px 20px;
+    border: 2px solid rgba(255, 102, 0, 0.4);
+    border-radius: 12px;
+    background: rgba(30, 30, 30, 0.8);
+    color: #fff;
+    font-family: 'Rubik', sans-serif;
+    font-size: 1em;
+}
+
+/* כרטיסי תלמידים */
+.students-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+.student-card {
+    background: rgba(30, 30, 30, 0.8);
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid rgba(255, 102, 0, 0.3);
+}
+
+.student-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.student-header h3 {
+    color: #ff9900;
+    font-size: 1.4em;
+}
+
+.attempts-badge {
+    background: rgba(33, 150, 243, 0.2);
+    border: 1px solid #2196F3;
+    color: #64B5F6;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85em;
+}
+
+.student-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-label {
+    color: #888;
+    font-size: 0.85em;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    color: #ff6600;
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+.stat-value.small {
+    font-size: 0.9em;
+}
+
+.btn-details {
+    width: 100%;
+    background: linear-gradient(135deg, #ff6600, #ff9900);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-details:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
+}
+
+/* ניהול משחקים */
+.games-manager {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 30px;
+}
+
+.game-item {
+    background: rgba(30, 30, 30, 0.8);
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid rgba(255, 102, 0, 0.3);
+}
+
+.game-item.active-game {
+    border-color: #28a745;
+    box-shadow: 0 5px 20px rgba(40, 167, 69, 0.3);
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.game-header h3 {
+    color: #ff9900;
+    font-size: 1.5em;
+}
+
+.status-badge {
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 700;
+}
+
+.status-badge.active {
+    background: #28a745;
+    color: white;
+}
+
+.game-stats-mini {
+    display: flex;
+    gap: 15px;
+    color: #aaa;
+    font-size: 0.95em;
+    margin-bottom: 20px;
+}
+
+.btn-view-results {
+    width: 100%;
+    background: rgba(33, 150, 243, 0.2);
+    border: 1px solid #2196F3;
+    color: #64B5F6;
+    padding: 12px;
+    border-radius: 10px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.add-game-prompt {
+    text-align: center;
+}
+
+.add-icon {
+    font-size: 4em;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.add-game-prompt h3 {
+    color: #aaa;
+    margin-bottom: 10px;
+}
+
+.add-game-prompt p {
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.btn-add-game {
+    background: rgba(255, 102, 0, 0.2);
+    border: 1px dashed #ff6600;
+    color: #ff9900;
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+/* דוחות */
+.report-controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.report-controls select {
+    flex: 1;
+    padding: 15px 20px;
+    border: 2px solid rgba(255, 102, 0, 0.4);
+    border-radius: 12px;
+    background: rgba(30, 30, 30, 0.8);
+    color: #fff;
+    font-family: 'Rubik', sans-serif;
+}
+
+.btn-export {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.report-content {
+    background: rgba(30, 30, 30, 0.8);
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid rgba(255, 102, 0, 0.3);
+    min-height: 400px;
+}
+
+.report-placeholder {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.placeholder-icon {
+    font-size: 5em;
+    margin-bottom: 20px;
+}
+
+.report-placeholder p {
+    color: #aaa;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.report-placeholder .small {
+    font-size: 0.95em;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .students-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .games-manager {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ממשק התחברות מורים */
+.teacher-modal {
+    max-width: 500px;
+}
+
+.tabs-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid rgba(255, 102, 0, 0.3);
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px 20px;
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-bottom: 3px solid transparent;
+}
+
+.tab-btn.active {
+    color: #ff6600;
+    border-bottom-color: #ff6600;
+}
+
+.tab-btn:hover {
+    color: #ff9900;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s;
+}
+
+/* מודאל גדול */
+.large-modal {
+    max-width: 900px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* רשימת תלמידים */
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.list-header h4 {
+    margin: 0;
+    color: #ff9900;
+}
+
+.list-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#searchStudent {
+    padding: 10px 15px;
+    border: 2px solid rgba(255, 102, 0, 0.3);
+    border-radius: 8px;
+    background: rgba(30, 30, 30, 0.8);
+    color: #e0e0e0;
+    font-size: 1em;
+    min-width: 250px;
+}
+
+#searchStudent:focus {
+    outline: none;
+    border-color: #ff6600;
+    box-shadow: 0 0 10px rgba(255, 102, 0, 0.3);
+}
+
+.students-list {
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 102, 0, 0.2);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.student-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, rgba(50, 50, 50, 0.6) 0%, rgba(40, 40, 40, 0.6) 100%);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255, 102, 0, 0.2);
+    transition: all 0.3s;
+}
+
+.student-row:hover {
+    background: linear-gradient(135deg, rgba(60, 60, 60, 0.8) 0%, rgba(50, 50, 50, 0.8) 100%);
+    border-color: #ff6600;
+    transform: translateX(-5px);
+}
+
+.student-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex: 1;
+}
+
+.student-id {
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    color: #64B5F6;
+    font-size: 1.1em;
+    min-width: 100px;
+}
+
+.student-name {
+    color: #e0e0e0;
+    font-weight: 600;
+    font-size: 1.05em;
+    flex: 1;
+}
+
+.student-source {
+    font-size: 0.9em;
+    color: #888;
+    background: rgba(255, 153, 0, 0.1);
+    padding: 4px 12px;
+    border-radius: 15px;
+}
+
+.student-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 102, 0, 0.3);
+    background: rgba(255, 102, 0, 0.1);
+    color: #ff9900;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon:hover {
+    background: #ff6600;
+    color: white;
+    transform: scale(1.1);
+}
+
+.btn-delete:hover {
+    background: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-remove:hover {
+    background: #ffc107;
+    border-color: #ffc107;
+}
+
+/* סטטוס ייבוא */
+.import-status {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.import-status .loading {
+    color: #ff9900;
+    background: rgba(255, 153, 0, 0.1);
+}
+
+.import-status .success {
+    color: #28a745;
+    background: rgba(40, 167, 69, 0.1);
+}
+
+.import-status .error {
+    color: #dc3545;
+    background: rgba(220, 53, 69, 0.1);
+}
+
+/* כרטיסי מורים */
+.teachers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.teacher-card {
+    background: linear-gradient(135deg, rgba(50, 50, 50, 0.8) 0%, rgba(40, 40, 40, 0.8) 100%);
+    border: 2px solid rgba(255, 102, 0, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    transition: all 0.3s;
+}
+
+.teacher-card:hover {
+    border-color: #ff6600;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 102, 0, 0.3);
+}
+
+.teacher-card h4 {
+    color: #ff9900;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.teacher-card p {
+    color: #aaa;
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.last-login {
+    font-size: 0.85em;
+    color: #666;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 102, 0, 0.2);
+}
+
+/* הודעה ריקה */
+.empty-msg {
+    text-align: center;
+    color: #888;
+    padding: 40px;
+    font-size: 1.1em;
+}
+
+/* כפתורים */
+.btn-secondary {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, rgba(100, 181, 246, 0.8), rgba(33, 150, 243, 0.8));
+    border: 2px solid #2196F3;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1em;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #64B5F6, #2196F3);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(33, 150, 243, 0.4);
+}
+
+/* אנימציות */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scrollbar מעוצב */
+.students-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+.students-list::-webkit-scrollbar-track {
+    background: rgba(30, 30, 30, 0.5);
+    border-radius: 10px;
+}
+
+.students-list::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #ff6600, #ff9900);
+    border-radius: 10px;
+}
+
+.students-list::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #ff9900, #ffbb00);
+}
+
+/* רשימת מורים קבועים */
+.fixed-teachers-list {
+    background: rgba(50, 50, 50, 0.5);
+    border: 2px solid rgba(100, 181, 246, 0.3);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 25px;
+}
+
+.teacher-option {
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(100, 181, 246, 0.2);
+    transition: all 0.3s;
+}
+
+.teacher-option:last-child {
+    border-bottom: none;
+}
+
+.teacher-option:hover {
+    background: rgba(100, 181, 246, 0.1);
+    padding-right: 20px;
+}
+
+.teacher-option strong {
+    color: #64B5F6;
+    font-size: 1.1em;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* תיבת אזהרה */
+.info-box.warning {
+    background: rgba(255, 152, 0, 0.1);
+    border: 2px solid rgba(255, 152, 0, 0.3);
+    border-right: 5px solid #ff9800;
+}
+
+/* מורה קבוע בכרטיס */
+.fixed-teacher {
+    border: 2px solid #64B5F6;
+    position: relative;
+}
+
+.fixed-teacher .badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: linear-gradient(135deg, #64B5F6, #2196F3);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: 700;
+    box-shadow: 0 3px 10px rgba(33, 150, 243, 0.4);
+}
+
+/* הסתרת קוד 1234 */
+.admin-code-hidden {
+    display: none !important;
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>משחקי למידה - תקשורת וחברה</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main-styles.css">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="welcome-container">
+        <div class="logo-container">
+            <div class="logo-icon">🎮</div>
+            <h1 class="main-title">משחקי למידה</h1>
+            <h2 class="sub-title">תקשורת וחברה</h2>
+            <p class="description">מערכת משחקים אינטראקטיבית ללמידה חווייתית</p>
+        </div>
+
+        <div class="cards-container">
+            <div class="access-card student-card" onclick="navigateToStudent()">
+                <div class="card-icon">👨‍🎓</div>
+                <h3>אזור תלמיד</h3>
+                <p>כניסה למשחקים והתקדמות אישית</p>
+                <div class="card-arrow">←</div>
+            </div>
+
+            <div class="access-card teacher-card" onclick="showTeacherLogin()">
+                <div class="card-icon">👨‍🏫</div>
+                <h3>אזור מורה</h3>
+                <p>ניהול, מעקב ודוחות תלמידים</p>
+                <div class="card-arrow">←</div>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <p>המרחב החינוכי תיכון עירוני ה' | מגמת תקשורת וקולנוע</p>
+        </div>
+    </div>
+
+    <!-- מודאל התחברות מורה -->
+    <div id="teacherLoginModal" class="modal-overlay hidden">
+        <div class="modal-content login-modal">
+            <div class="modal-header">
+                <h3>🔐 כניסה לאזור מורה</h3>
+                <button class="close-btn" onclick="closeTeacherLogin()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label for="teacherPassword">סיסמת מורה:</label>
+                    <input type="password" id="teacherPassword" placeholder="הזן סיסמה" onkeypress="if(event.key==='Enter') attemptTeacherLogin()">
+                </div>
+                <div id="loginError" class="error-message hidden">❌ סיסמה שגויה</div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" onclick="attemptTeacherLogin()">כניסה</button>
+                <button class="btn-secondary" onclick="closeTeacherLogin()">ביטול</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="shared/sounds.js"></script>
+    <script>
+        const TEACHER_PASSWORD = '1234';
+
+        function navigateToStudent() {
+            window.soundManager.playClick();
+            setTimeout(() => {
+                window.location.href = 'student/index.html';
+            }, 200);
+        }
+
+        function showTeacherLogin() {
+            window.soundManager.playClick();
+            document.getElementById('teacherLoginModal').classList.remove('hidden');
+            document.getElementById('teacherPassword').focus();
+        }
+
+        function closeTeacherLogin() {
+            window.soundManager.playClick();
+            document.getElementById('teacherLoginModal').classList.add('hidden');
+            document.getElementById('teacherPassword').value = '';
+            document.getElementById('loginError').classList.add('hidden');
+        }
+
+        function attemptTeacherLogin() {
+            const password = document.getElementById('teacherPassword').value;
+            
+            if (password === TEACHER_PASSWORD) {
+                window.soundManager.playCorrect();
+                localStorage.setItem('teacherAuth', 'true');
+                setTimeout(() => {
+                    window.location.href = 'teacher/index.html';
+                }, 500);
+            } else {
+                window.soundManager.playIncorrect();
+                document.getElementById('loginError').classList.remove('hidden');
+                document.getElementById('teacherPassword').value = '';
+                document.getElementById('teacherPassword').classList.add('shake');
+                setTimeout(() => {
+                    document.getElementById('teacherPassword').classList.remove('shake');
+                }, 500);
+            }
+        }
+
+        // יצירת כוכבים ברקע
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        window.addEventListener('load', createStars);
+    </script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אזור תלמיד - משחקי למידה</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- כותרת עליונה -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo" onclick="goHome()">
+                <span class="logo-icon">🎮</span>
+                <span class="logo-text">משחקי למידה</span>
+            </div>
+            <div class="user-info">
+                <span class="user-greeting">שלום, <span id="studentNameDisplay">תלמיד</span></span>
+                <button class="btn-logout" onclick="logout()">🚪 יציאה</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- תוכן ראשי -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h1>המשחקים שלי</h1>
+                <p class="subtitle">בחר משחק כדי להתחיל ללמוד!</p>
+            </div>
+
+            <!-- רשימת משחקים -->
+            <div class="games-grid">
+                <!-- משחק 1: זירת התרבות הדיגיטלית -->
+                <div class="game-card" onclick="playGame('digital-culture')">
+                    <div class="game-card-header">
+                        <div class="game-icon">🌐</div>
+                        <div class="game-status active">פעיל</div>
+                    </div>
+                    <div class="game-card-body">
+                        <h3>זירת התרבות הדיגיטלית</h3>
+                        <p class="game-description">16 מושגים מרכזיים בתקשורת דיגיטלית - מתקשורת מסורתית ועד אלימות ברשת</p>
+                        <div class="game-stats">
+                            <div class="stat">
+                                <span class="stat-icon">📝</span>
+                                <span>80 שאלות</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-icon">⏱️</span>
+                                <span>45-60 דקות</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-icon">🎯</span>
+                                <span>5 רמות קושי</span>
+                            </div>
+                        </div>
+                        <div class="game-progress">
+                            <div class="progress-label">
+                                <span>ההתקדמות שלי</span>
+                                <span id="progress-digital-culture">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-bar-digital-culture" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-card-footer">
+                        <button class="btn-play">▶ שחק עכשיו</button>
+                    </div>
+                </div>
+
+                <!-- משחק 2: בקרוב -->
+                <div class="game-card coming-soon">
+                    <div class="game-card-header">
+                        <div class="game-icon">📺</div>
+                        <div class="game-status upcoming">בקרוב</div>
+                    </div>
+                    <div class="game-card-body">
+                        <h3>זירת הטלוויזיה והקולנוע</h3>
+                        <p class="game-description">מושגים בסוגות, ייצוגים ותעשיית הטלוויזיה והקולנוע</p>
+                        <div class="coming-soon-overlay">
+                            <div class="coming-soon-text">
+                                <div class="soon-icon">🚀</div>
+                                <p>המשחק בפיתוח</p>
+                                <small>יושק בקרוב</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- משחק 3: בקרוב -->
+                <div class="game-card coming-soon">
+                    <div class="game-card-header">
+                        <div class="game-icon">📰</div>
+                        <div class="game-status upcoming">בקרוב</div>
+                    </div>
+                    <div class="game-card-body">
+                        <h3>זירת החדשות והעיתונות</h3>
+                        <p class="game-description">מבנה חדשות, סוגות עיתונאיות ועבודת העיתונאי</p>
+                        <div class="coming-soon-overlay">
+                            <div class="coming-soon-text">
+                                <div class="soon-icon">🚀</div>
+                                <p>המשחק בפיתוח</p>
+                                <small>יושק בקרוב</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- משחק 4: בקרוב -->
+                <div class="game-card coming-soon">
+                    <div class="game-card-header">
+                        <div class="game-icon">🎬</div>
+                        <div class="game-status upcoming">בקרוב</div>
+                    </div>
+                    <div class="game-card-body">
+                        <h3>זירת הפרסום והשיווק</h3>
+                        <p class="game-description">אסטרטגיות פרסום, ניתוח קהל יעד ותעשיית השיווק</p>
+                        <div class="coming-soon-overlay">
+                            <div class="coming-soon-text">
+                                <div class="soon-icon">🚀</div>
+                                <p>המשחק בפיתוח</p>
+                                <small>יושק בקרוב</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- מודאל כניסה -->
+    <div id="nameModal" class="modal-overlay">
+        <div class="modal-content name-modal">
+            <div class="modal-header">
+                <h3>🎓 כניסת תלמיד</h3>
+            </div>
+            <div class="modal-body">
+                <p>התחבר באמצעות שם המשתמש והסיסמה שקיבלת מהמורה:</p>
+                <div class="input-group">
+                    <label>שם משתמש:</label>
+                    <input type="text" id="usernameInput" placeholder="שם משתמש">
+                </div>
+                <div class="input-group">
+                    <label>סיסמה:</label>
+                    <input type="password" id="passwordInput" placeholder="סיסמה"
+                           onkeypress="if(event.key==='Enter') loginStudent()">
+                </div>
+                <div id="loginError" style="color: #dc3545; margin: 10px 0;"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" onclick="loginStudent()">התחבר</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../shared/sounds.js"></script>
+    <script type="module" src="../shared/firebase-config.js"></script>
+    <script src="../teacher/permissions-manager.js"></script>
+    <script>
+        let studentId = '';
+        let studentName = '';
+        let studentUsername = '';
+
+        // בדיקה אם יש התחברות קיימת
+        window.addEventListener('load', function() {
+            const savedId = localStorage.getItem('studentId');
+            const savedName = localStorage.getItem('studentName');
+            
+            if (savedId && savedName) {
+                studentId = savedId;
+                studentName = savedName;
+                document.getElementById('studentNameDisplay').textContent = studentName;
+                document.getElementById('nameModal').classList.add('hidden');
+                loadProgress();
+            } else {
+                document.getElementById('nameModal').classList.remove('hidden');
+                document.getElementById('usernameInput').focus();
+            }
+        });
+
+        async function loginStudent() {
+            const username = document.getElementById('usernameInput').value.trim();
+            const password = document.getElementById('passwordInput').value;
+            const errorDiv = document.getElementById('loginError');
+            
+            errorDiv.textContent = '';
+            
+            if (!username || !password) {
+                errorDiv.textContent = 'נא למלא שם משתמש וסיסמה';
+                return;
+            }
+            
+            // אימות מול המערכת
+            const result = await PermissionsManager.authenticate(username, password);
+            
+            if (!result.ok) {
+                errorDiv.textContent = '❌ ' + result.msg;
+                return;
+            }
+            
+            // התחברות מוצלחת
+            if (window.soundManager) window.soundManager.playCorrect();
+            
+            const student = result.student;
+            studentId = student.id;
+            studentName = student.name;
+            studentUsername = student.username;
+            
+            // שמירה
+            localStorage.setItem('studentId', studentId);
+            localStorage.setItem('studentName', studentName);
+            localStorage.setItem('studentUsername', studentUsername);
+            
+            document.getElementById('studentNameDisplay').textContent = studentName;
+            document.getElementById('nameModal').classList.add('hidden');
+            loadProgress();
+        }
+
+        function loadProgress() {
+            // טעינת התקדמות מ-localStorage
+            const progress = localStorage.getItem('progress-digital-culture') || '0';
+            document.getElementById('progress-digital-culture').textContent = progress + '%';
+            document.getElementById('progress-bar-digital-culture').style.width = progress + '%';
+        }
+
+        function playGame(gameId) {
+            window.soundManager.playStart();
+            
+            if (gameId === 'digital-culture') {
+                setTimeout(() => {
+                    window.location.href = '../games/digital-culture/index.html';
+                }, 300);
+            } else {
+                window.soundManager.playIncorrect();
+                alert('המשחק עדיין לא זמין');
+            }
+        }
+
+        function goHome() {
+            window.soundManager.playClick();
+            if (confirm('האם אתה בטוח שברצונך לחזור לדף הבית?')) {
+                window.location.href = '../landing.html';
+            }
+        }
+
+        function logout() {
+            window.soundManager.playClick();
+            if (confirm('האם אתה בטוח שברצונך לצאת?')) {
+                localStorage.removeItem('studentName');
+                window.location.href = '../landing.html';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אזור מורה - ניהול ומעקב</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- כותרת עליונה -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo" onclick="goHome()">
+                <span class="logo-icon">👨‍🏫</span>
+                <span class="logo-text">אזור מורה</span>
+            </div>
+            <div class="header-actions">
+                <button class="btn-settings" onclick="showSettings()">⚙️ הגדרות</button>
+                <button class="btn-logout" onclick="logout()">🚪 יציאה</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- תוכן ראשי -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <!-- טאבים -->
+            <div class="tabs-container">
+                <button class="tab-btn active" data-tab="overview" onclick="switchTab('overview')">
+                    📊 סקירה כללית
+                </button>
+                <button class="tab-btn" data-tab="students" onclick="switchTab('students')">
+                    👥 תלמידים
+                </button>
+                <button class="tab-btn" data-tab="games" onclick="switchTab('games')">
+                    🎮 משחקים
+                </button>
+                <button class="tab-btn" data-tab="reports" onclick="switchTab('reports')">
+                    📈 דוחות
+                </button>
+            </div>
+
+            <!-- תוכן טאבים -->
+            <div class="tab-content active" id="overview-tab">
+                <h2>סקירה כללית</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="totalStudents">0</div>
+                            <div class="stat-label">תלמידים פעילים</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="completedGames">0</div>
+                            <div class="stat-label">משחקים שהושלמו</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="averageScore">0</div>
+                            <div class="stat-label">ממוצע ציונים</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="averageProgress">0%</div>
+                            <div class="stat-label">ממוצע התקדמות</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>פעילות אחרונה</h3>
+                    <div id="recentActivityList"></div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="students-tab">
+                <h2>רשימת תלמידים</h2>
+                
+                <div class="filters">
+                    <input type="text" id="searchStudent" placeholder="🔍 חיפוש תלמיד..." oninput="filterStudents()">
+                    <select id="filterGame" onchange="filterStudents()">
+                        <option value="">כל המשחקים</option>
+                        <option value="digital-culture">זירת התרבות הדיגיטלית</option>
+                    </select>
+                </div>
+
+                <div id="studentsList" class="students-list"></div>
+            </div>
+
+            <div class="tab-content" id="games-tab">
+                <h2>ניהול משחקים</h2>
+                
+                <div class="games-manager">
+                    <div class="game-item active-game">
+                        <div class="game-header">
+                            <h3>🌐 זירת התרבות הדיגיטלית</h3>
+                            <span class="status-badge active">פעיל</span>
+                        </div>
+                        <div class="game-stats-mini">
+                            <span>16 מושגים</span>
+                            <span>80 שאלות</span>
+                            <span id="game1Players">0 משתתפים</span>
+                        </div>
+                        <div class="game-actions">
+                            <button class="btn-view-results" onclick="viewGameResults('digital-culture')">צפה בתוצאות</button>
+                        </div>
+                    </div>
+
+                    <div class="game-item">
+                        <div class="add-game-prompt">
+                            <div class="add-icon">➕</div>
+                            <h3>הוסף משחק חדש</h3>
+                            <p>צור משחק חדש או ייבא מערכת קיימת</p>
+                            <button class="btn-add-game">הוסף משחק</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="reports-tab">
+                <h2>דוחות מפורטים</h2>
+                
+                <div class="report-controls">
+                    <select id="reportType" onchange="generateReport()">
+                        <option value="progress">התקדמות תלמידים</option>
+                        <option value="scores">ציונים לפי מושג</option>
+                        <option value="difficulty">ביצועים לפי רמת קושי</option>
+                        <option value="completion">שיעור השלמה</option>
+                    </select>
+                    <button class="btn-export" onclick="exportReport()">📥 ייצא לExcel</button>
+                </div>
+
+                <div id="reportContent" class="report-content"></div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="../shared/firebase-config.js"></script>
+    <script src="../shared/sounds.js"></script>
+    <script src="permissions-manager.js"></script>
+    <script src="permissions-ui.js"></script>
+    <script>
+        // טעינת ממשק
+        window.addEventListener('load', function() {
+            document.getElementById('teacherNameDisplay').textContent = 'מנהל המערכת';
+            loadDashboard();
+            
+            // הוספת כפתור ניהול הרשאות
+            const nav = document.querySelector('.tabs');
+            if (nav) {
+                const btn = document.createElement('button');
+                btn.className = 'tab-btn';
+                btn.textContent = '🔐 ניהול הרשאות תלמידים';
+                btn.onclick = showPermissions;
+                nav.appendChild(btn);
+            }
+        });
+
+        function switchTab(tabName) {
+            window.soundManager.playClick();
+            
+            // הסרת active מכל הטאבים
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // הוספת active לטאב הנבחר
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+            
+            if (tabName === 'students') {
+                loadStudents();
+            } else if (tabName === 'reports') {
+                generateReport();
+            }
+        }
+
+        function loadDashboard() {
+            try {
+                if (window.firebaseDB) {
+                    const resultsRef = window.firebaseRef(window.firebaseDB, 'game-results/digital-culture');
+                    window.firebaseOnValue(resultsRef, (snapshot) => {
+                        const data = snapshot.val();
+                        if (data) {
+                            updateDashboard(data);
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+            }
+        }
+
+        function updateDashboard(data) {
+            const results = Object.values(data);
+            
+            // סטטיסטיקות
+            document.getElementById('totalStudents').textContent = new Set(results.map(r => r.name)).size;
+            document.getElementById('completedGames').textContent = results.length;
+            
+            const avgScore = results.reduce((sum, r) => sum + r.totalScore, 0) / results.length;
+            document.getElementById('averageScore').textContent = Math.round(avgScore);
+            
+            const avgProgress = results.reduce((sum, r) => {
+                const progress = (r.totalCorrect / (r.totalCorrect + r.totalIncorrect)) * 100;
+                return sum + progress;
+            }, 0) / results.length;
+            document.getElementById('averageProgress').textContent = Math.round(avgProgress) + '%';
+            
+            // פעילות אחרונה
+            const recent = results.sort((a, b) => b.timestamp - a.timestamp).slice(0, 5);
+            const activityHTML = recent.map(r => `
+                <div class="activity-item">
+                    <div class="activity-icon">✅</div>
+                    <div class="activity-info">
+                        <strong>${r.name}</strong> סיים את "זירת התרבות הדיגיטלית"
+                        <div class="activity-meta">
+                            <span>ציון: ${r.totalScore}</span>
+                            <span>${new Date(r.timestamp).toLocaleDateString('he-IL')}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('recentActivityList').innerHTML = activityHTML;
+            
+            // עדכון משתתפים במשחק
+            document.getElementById('game1Players').textContent = new Set(results.map(r => r.name)).size + ' משתתפים';
+        }
+
+        function loadStudents() {
+            try {
+                if (window.firebaseDB) {
+                    const resultsRef = window.firebaseRef(window.firebaseDB, 'game-results/digital-culture');
+                    window.firebaseOnValue(resultsRef, (snapshot) => {
+                        const data = snapshot.val();
+                        if (data) {
+                            displayStudents(data);
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading students:', error);
+            }
+        }
+
+        function displayStudents(data) {
+            const results = Object.values(data);
+            const studentMap = {};
+            
+            // קיבוץ לפי תלמיד
+            results.forEach(r => {
+                if (!studentMap[r.name]) {
+                    studentMap[r.name] = [];
+                }
+                studentMap[r.name].push(r);
+            });
+            
+            const studentsHTML = Object.entries(studentMap).map(([name, attempts]) => {
+                const lastAttempt = attempts.sort((a, b) => b.timestamp - a.timestamp)[0];
+                const avgScore = attempts.reduce((sum, a) => sum + a.totalScore, 0) / attempts.length;
+                const progress = (lastAttempt.totalCorrect / (lastAttempt.totalCorrect + lastAttempt.totalIncorrect)) * 100;
+                
+                return `
+                    <div class="student-card">
+                        <div class="student-header">
+                            <h3>👤 ${name}</h3>
+                            <span class="attempts-badge">${attempts.length} ניסיונות</span>
+                        </div>
+                        <div class="student-stats">
+                            <div class="stat">
+                                <span class="stat-label">ממוצע ציונים</span>
+                                <span class="stat-value">${Math.round(avgScore)}</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">אחוז הצלחה</span>
+                                <span class="stat-value">${Math.round(progress)}%</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">ניסיון אחרון</span>
+                                <span class="stat-value small">${new Date(lastAttempt.timestamp).toLocaleDateString('he-IL')}</span>
+                            </div>
+                        </div>
+                        <button class="btn-details" onclick="showStudentDetails('${name}')">צפה בפירוט</button>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('studentsList').innerHTML = studentsHTML;
+        }
+
+        function filterStudents() {
+            const search = document.getElementById('searchStudent').value.toLowerCase();
+            const cards = document.querySelectorAll('.student-card');
+            
+            cards.forEach(card => {
+                const name = card.querySelector('h3').textContent.toLowerCase();
+                card.style.display = name.includes(search) ? 'block' : 'none';
+            });
+        }
+
+        function generateReport() {
+            const type = document.getElementById('reportType').value;
+            document.getElementById('reportContent').innerHTML = `
+                <div class="report-placeholder">
+                    <div class="placeholder-icon">📊</div>
+                    <p>בונה דוח "${type}"...</p>
+                    <p class="small">הדוח יוצג כאן בקרוב</p>
+                </div>
+            `;
+        }
+
+        function exportReport() {
+            window.soundManager.playClick();
+            alert('ייצוא ל-Excel יהיה זמין בקרוב');
+        }
+
+        function viewGameResults(gameId) {
+            window.soundManager.playClick();
+            switchTab('students');
+        }
+
+        function showStudentDetails(name) {
+            window.soundManager.playClick();
+            alert('פירוט תלמיד: ' + name + '\n\nיוצג בחלון נפרד בקרוב');
+        }
+
+        function showSettings() {
+            window.soundManager.playClick();
+            alert('הגדרות מערכת\n\nסיסמה נוכחית: 1234\n(שינוי סיסמה יהיה זמין בקרוב)');
+        }
+
+        function goHome() {
+            window.soundManager.playClick();
+            if (confirm('האם אתה בטוח שברצונך לחזור לדף הבית?')) {
+                handleTeacherLogout();
+            }
+        }
+
+        function logout() {
+            window.soundManager.playClick();
+            handleTeacherLogout();
+        }
+        
+        // הוספת כפתור ניהול תלמידים לתפריט
+        window.addEventListener('load', function() {
+            const nav = document.querySelector('.tabs');
+            if (nav && TeacherSystem.currentTeacher) {
+                const manageBtn = document.createElement('button');
+                manageBtn.className = 'tab-btn';
+                manageBtn.innerHTML = '👥 ניהול תלמידים';
+                manageBtn.onclick = showStudentsManager;
+                nav.appendChild(manageBtn);
+                
+                const teachersBtn = document.createElement('button');
+                teachersBtn.className = 'tab-btn';
+                teachersBtn.innerHTML = '👨‍🏫 כל המורים';
+                teachersBtn.onclick = showTeachersList;
+                nav.appendChild(teachersBtn);
+            }
+        });
+    </script>
+</body>
+</html>
