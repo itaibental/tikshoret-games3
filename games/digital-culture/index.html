@@ -85,25 +85,10 @@
     <script type="module" src="../../shared/firebase-config.js"></script>
     <script src="../../shared/sounds.js"></script>
     <script src="../../teacher/simple-permissions.js"></script>
-    <script src="data.js"></script>
-    <script src="game.js"></script>
+    <script src="complete-concepts.js"></script>
+    <script src="progress-manager.js"></script>
+    <script src="game-fixed.js"></script>
     
-    <script>
-        // טעינת שם התלמיד
-        window.addEventListener('load', function() {
-            const savedName = localStorage.getItem('studentName');
-            if (savedName) {
-                document.getElementById('studentName').value = savedName;
-                updateStartButton();
-            }
-        });
-        
-        function goBack() {
-            window.soundManager.playClick();
-            if (confirm('האם אתה בטוח שברצונך לחזור? התקדמותך תישמר.')) {
-                window.location.href = '../../student/index.html';
-            }
-        }
     </script>
 </body>
 </html>

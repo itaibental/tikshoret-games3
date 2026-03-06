@@ -984,3 +984,56 @@ input[type="password"]:focus {
 body {
     padding-bottom: 60px;
 }
+
+/* תיקון זליגות טקסט */
+* {
+    box-sizing: border-box;
+}
+
+.modal-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.modal-body {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.situation-box, .question-box {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+.answer-btn {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    text-align: right;
+    padding: 15px 20px;
+    line-height: 1.6;
+}
+
+.concept-item label {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    display: block;
+}
+
+/* תיקון תצוגה ניידת */
+@media (max-width: 768px) {
+    .modal-content {
+        max-width: 95vw;
+        padding: 15px;
+    }
+    
+    .answer-btn {
+        font-size: 14px;
+        padding: 12px 15px;
+    }
+}

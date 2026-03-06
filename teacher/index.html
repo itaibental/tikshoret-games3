@@ -509,6 +509,15 @@
                                     </div>
                                     <div class="settings-arrow">←</div>
                                 </div>
+                                
+                                <div class="settings-item" onclick="deleteAllCloudData()" style="border-color: #dc3545;">
+                                    <div class="settings-icon">🗑️</div>
+                                    <div class="settings-info">
+                                        <div class="settings-title" style="color: #dc3545;">מחק את כל הנתונים מהענן</div>
+                                        <div class="settings-desc">מחיקה מלאה של כל התוצאות וההתקדמות</div>
+                                    </div>
+                                    <div class="settings-arrow" style="color: #dc3545;">←</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -516,6 +525,46 @@
             `;
             
             document.body.insertAdjacentHTML('beforeend', settingsMenu);
+        }
+
+        async function deleteAllCloudData() {
+            const confirmed = confirm(
+                '⚠️ אזהרה חמורה! ⚠️\n\n' +
+                'פעולה זו תמחק לצמיתות:\n' +
+                '• את כל התוצאות של כל התלמידים\n' +
+                '• את כל נתוני ההתקדמות\n' +
+                '• את כל המידע השמור בענן\n\n' +
+                'לא ניתן לשחזר נתונים אלו!\n\n' +
+                'האם אתה בטוח לחלוטין?'
+            );
+            
+            if (!confirmed) return;
+            
+            const doubleCheck = prompt('הקלד "מחק הכל" לאישור:');
+            if (doubleCheck !== 'מחק הכל') {
+                alert('הפעולה בוטלה');
+                return;
+            }
+            
+            try {
+                if (window.firebaseDB) {
+                    // מחיקת תוצאות משחקים
+                    const resultsRef = window.firebaseRef(window.firebaseDB, 'game-results/digital-culture');
+                    await window.firebaseRemove(resultsRef);
+                    
+                    // מחיקת התקדמות תלמידים
+                    const progressRef = window.firebaseRef(window.firebaseDB, 'student-progress/digital-culture');
+                    await window.firebaseRemove(progressRef);
+                    
+                    alert('✅ כל הנתונים נמחקו מהענן בהצלחה!');
+                    closeSettings();
+                    location.reload();
+                } else {
+                    alert('❌ Firebase לא זמין');
+                }
+            } catch (error) {
+                alert('❌ שגיאה במחיקה: ' + error.message);
+            }
         }
 
         function closeSettings() {
