@@ -16,6 +16,9 @@
                 <span class="logo-text">אזור מורה</span>
             </div>
             <div class="header-actions">
+                <button class="btn-permissions" onclick="showPermissions()" style="background: linear-gradient(135deg, #64B5F6, #2196F3); color: white; padding: 10px 20px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 16px; margin-left: 15px;">
+                    🔐 ניהול הרשאות תלמידים
+                </button>
                 <button class="btn-settings" onclick="showSettings()">⚙️ הגדרות</button>
                 <button class="btn-logout" onclick="logout()">🚪 יציאה</button>
             </div>
@@ -79,6 +82,19 @@
                     </div>
                 </div>
 
+                <!-- כרטיס ניהול הרשאות -->
+                <div style="margin: 30px 0; padding: 30px; background: linear-gradient(135deg, rgba(100, 181, 246, 0.15), rgba(33, 150, 243, 0.15)); border: 3px solid #2196F3; border-radius: 20px; text-align: center; box-shadow: 0 8px 25px rgba(33, 150, 243, 0.2);">
+                    <div style="font-size: 48px; margin-bottom: 15px;">🔐</div>
+                    <h3 style="color: #64B5F6; margin-bottom: 15px; font-size: 24px;">ניהול הרשאות תלמידים</h3>
+                    <p style="color: #bbb; margin-bottom: 25px; font-size: 16px; line-height: 1.6;">
+                        הוסף תלמידים חדשים למערכת, הענק להם שם משתמש וסיסמה,<br>
+                        ייבא רשימות מגוגל שיטס, ונהל הרשאות גישה למשחקים
+                    </p>
+                    <button onclick="showPermissions()" style="padding: 18px 50px; background: linear-gradient(135deg, #64B5F6, #2196F3); border: none; border-radius: 12px; color: white; font-size: 20px; font-weight: 700; cursor: pointer; box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 30px rgba(33, 150, 243, 0.6)'" onmouseout="this.style.transform=''; this.style.boxShadow='0 6px 20px rgba(33, 150, 243, 0.4)'">
+                        ➕ פתח ניהול הרשאות
+                    </button>
+                </div>
+
                 <div class="recent-activity">
                     <h3>פעילות אחרונה</h3>
                     <div id="recentActivityList"></div>
@@ -86,7 +102,12 @@
             </div>
 
             <div class="tab-content" id="students-tab">
-                <h2>רשימת תלמידים</h2>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                    <h2 style="margin: 0;">רשימת תלמידים</h2>
+                    <button onclick="showPermissions()" style="padding: 12px 25px; background: linear-gradient(135deg, #64B5F6, #2196F3); border: none; border-radius: 10px; color: white; font-size: 16px; font-weight: 700; cursor: pointer;">
+                        🔐 ניהול הרשאות
+                    </button>
+                </div>
                 
                 <div class="filters">
                     <input type="text" id="searchStudent" placeholder="🔍 חיפוש תלמיד..." oninput="filterStudents()">
