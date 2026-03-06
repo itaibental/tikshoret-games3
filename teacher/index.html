@@ -170,23 +170,13 @@
 
     <script type="module" src="../shared/firebase-config.js"></script>
     <script src="../shared/sounds.js"></script>
-    <script src="permissions-manager.js"></script>
-    <script src="permissions-ui.js"></script>
+    <script src="simple-permissions.js"></script>
+    <script src="simple-permissions-ui.js"></script>
     <script>
         // טעינת ממשק
         window.addEventListener('load', function() {
             document.getElementById('teacherNameDisplay').textContent = 'מנהל המערכת';
             loadDashboard();
-            
-            // הוספת כפתור ניהול הרשאות
-            const nav = document.querySelector('.tabs');
-            if (nav) {
-                const btn = document.createElement('button');
-                btn.className = 'tab-btn';
-                btn.textContent = '🔐 ניהול הרשאות תלמידים';
-                btn.onclick = showPermissions;
-                nav.appendChild(btn);
-            }
         });
 
         function switchTab(tabName) {

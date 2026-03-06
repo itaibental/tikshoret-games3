@@ -137,31 +137,30 @@
                 <h3>🎓 כניסת תלמיד</h3>
             </div>
             <div class="modal-body">
-                <p>התחבר באמצעות שם המשתמש והסיסמה שקיבלת מהמורה:</p>
+                <p>הזן את תעודת הזהות שלך להתחברות:</p>
                 <div class="input-group">
-                    <label>שם משתמש:</label>
-                    <input type="text" id="usernameInput" placeholder="שם משתמש">
+                    <label>תעודת זהות:</label>
+                    <input type="text" id="studentIdInput" placeholder="9 ספרות" 
+                           maxlength="9" pattern="[0-9]{9}"
+                           onkeypress="if(event.key==='Enter') loginSimpleStudent()">
                 </div>
-                <div class="input-group">
-                    <label>סיסמה:</label>
-                    <input type="password" id="passwordInput" placeholder="סיסמה"
-                           onkeypress="if(event.key==='Enter') loginStudent()">
-                </div>
-                <div id="loginError" style="color: #dc3545; margin: 10px 0;"></div>
+                <div id="loginError" style="color: #dc3545; margin: 10px 0; font-weight: 600;"></div>
+                <p style="color: #888; font-size: 14px; margin-top: 15px;">
+                    💡 אם אינך מצליח להיכנס, פנה למורה שלך
+                </p>
             </div>
             <div class="modal-footer">
-                <button class="btn-primary" onclick="loginStudent()">התחבר</button>
+                <button class="btn-primary" onclick="loginSimpleStudent()">התחבר</button>
             </div>
         </div>
     </div>
 
     <script src="../shared/sounds.js"></script>
     <script type="module" src="../shared/firebase-config.js"></script>
-    <script src="../teacher/permissions-manager.js"></script>
+    <script src="../teacher/simple-permissions.js"></script>
     <script>
         let studentId = '';
         let studentName = '';
-        let studentUsername = '';
 
         // בדיקה אם יש התחברות קיימת
         window.addEventListener('load', function() {
@@ -176,27 +175,26 @@
                 loadProgress();
             } else {
                 document.getElementById('nameModal').classList.remove('hidden');
-                document.getElementById('usernameInput').focus();
+                document.getElementById('studentIdInput').focus();
             }
         });
 
-        async function loginStudent() {
-            const username = document.getElementById('usernameInput').value.trim();
-            const password = document.getElementById('passwordInput').value;
+        async function loginSimpleStudent() {
+            const id = document.getElementById('studentIdInput').value.trim();
             const errorDiv = document.getElementById('loginError');
             
             errorDiv.textContent = '';
             
-            if (!username || !password) {
-                errorDiv.textContent = 'נא למלא שם משתמש וסיסמה';
+            if (!id) {
+                errorDiv.textContent = 'נא להזין תעודת זהות';
                 return;
             }
             
-            // אימות מול המערכת
-            const result = await PermissionsManager.authenticate(username, password);
+            // אימות
+            const result = await SimplePermissions.authenticate(id);
             
             if (!result.ok) {
-                errorDiv.textContent = '❌ ' + result.msg;
+                errorDiv.textContent = '❌ ' + result.msg + '\nפנה למורה שלך להוספתך לרשימה.';
                 return;
             }
             
@@ -206,12 +204,10 @@
             const student = result.student;
             studentId = student.id;
             studentName = student.name;
-            studentUsername = student.username;
             
             // שמירה
             localStorage.setItem('studentId', studentId);
             localStorage.setItem('studentName', studentName);
-            localStorage.setItem('studentUsername', studentUsername);
             
             document.getElementById('studentNameDisplay').textContent = studentName;
             document.getElementById('nameModal').classList.add('hidden');
