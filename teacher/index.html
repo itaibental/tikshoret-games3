@@ -79,20 +79,20 @@
                     </div>
                 </div>
 
-                <!-- כרטיס ניהול הרשאות - מרכזי וגדול -->
-                <div style="margin: 40px auto; max-width: 800px; padding: 50px 40px; background: linear-gradient(135deg, rgba(100, 181, 246, 0.2), rgba(33, 150, 243, 0.2)); border: 4px solid #2196F3; border-radius: 25px; text-align: center; box-shadow: 0 12px 40px rgba(33, 150, 243, 0.3);">
-                    <div style="font-size: 64px; margin-bottom: 20px;">🔐</div>
-                    <h2 style="color: #64B5F6; margin-bottom: 20px; font-size: 32px; font-weight: 800;">ניהול הרשאות תלמידים</h2>
-                    <p style="color: #bbb; margin-bottom: 30px; font-size: 18px; line-height: 1.8;">
+                <!-- כרטיס ניהול הרשאות - ממורכז -->
+                <div style="margin: 40px auto; max-width: 900px; padding: 50px 40px; background: linear-gradient(135deg, rgba(100, 181, 246, 0.2), rgba(33, 150, 243, 0.2)); border: 4px solid #2196F3; border-radius: 25px; text-align: center; box-shadow: 0 12px 40px rgba(33, 150, 243, 0.3);">
+                    <div style="font-size: 72px; margin-bottom: 25px;">🔐</div>
+                    <h2 style="color: #64B5F6; margin-bottom: 25px; font-size: 36px; font-weight: 900;">ניהול הרשאות תלמידים</h2>
+                    <p style="color: #ddd; margin-bottom: 35px; font-size: 19px; line-height: 1.9; max-width: 700px; margin-left: auto; margin-right: auto;">
                         כאן תוכל להוסיף תלמידים חדשים למערכת, לנהל הרשאות גישה,<br>
                         לייבא רשימות מגוגל שיטס ולשלוט מי יכול להיכנס למשחקים
                     </p>
-                    <div style="background: rgba(0, 0, 0, 0.2); padding: 20px; border-radius: 15px; margin-bottom: 30px;">
-                        <p style="color: #64B5F6; font-size: 16px; margin: 0;">
+                    <div style="background: rgba(0, 0, 0, 0.3); padding: 25px; border-radius: 15px; margin: 0 auto 35px auto; max-width: 650px;">
+                        <p style="color: #64B5F6; font-size: 18px; margin: 0; font-weight: 600;">
                             💡 <strong>פשוט וקל:</strong> רק שם ותעודת זהות - הת"ז משמשת גם כסיסמה!
                         </p>
                     </div>
-                    <button onclick="showPermissions()" style="padding: 20px 60px; background: linear-gradient(135deg, #64B5F6, #2196F3); border: none; border-radius: 15px; color: white; font-size: 22px; font-weight: 800; cursor: pointer; box-shadow: 0 8px 25px rgba(33, 150, 243, 0.5); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px) scale(1.05)'; this.style.boxShadow='0 15px 40px rgba(33, 150, 243, 0.7)'" onmouseout="this.style.transform=''; this.style.boxShadow='0 8px 25px rgba(33, 150, 243, 0.5)'">
+                    <button onclick="showPermissions()" style="padding: 22px 70px; background: linear-gradient(135deg, #64B5F6, #2196F3); border: none; border-radius: 15px; color: white; font-size: 24px; font-weight: 900; cursor: pointer; box-shadow: 0 10px 30px rgba(33, 150, 243, 0.6); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px) scale(1.05)'; this.style.boxShadow='0 15px 40px rgba(33, 150, 243, 0.8)'" onmouseout="this.style.transform=''; this.style.boxShadow='0 10px 30px rgba(33, 150, 243, 0.6)'">
                         ➕ פתח ניהול הרשאות
                     </button>
                 </div>
@@ -104,12 +104,7 @@
             </div>
 
             <div class="tab-content" id="students-tab">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
-                    <h2 style="margin: 0;">רשימת תלמידים</h2>
-                    <button onclick="showPermissions()" style="padding: 12px 25px; background: linear-gradient(135deg, #64B5F6, #2196F3); border: none; border-radius: 10px; color: white; font-size: 16px; font-weight: 700; cursor: pointer;">
-                        🔐 ניהול הרשאות
-                    </button>
-                </div>
+                <h2>רשימת תלמידים</h2>
                 
                 <div class="filters">
                     <input type="text" id="searchStudent" placeholder="🔍 חיפוש תלמיד..." oninput="filterStudents()">
